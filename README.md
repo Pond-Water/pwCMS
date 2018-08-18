@@ -1,4 +1,4 @@
-# PWC
+# pwCMS
 
 Pond-Water CMS - A CMS & Blogging Platform
 

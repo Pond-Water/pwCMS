@@ -1,10 +1,24 @@
 {
-    "name": "Pond-Water-CMS",
-    "version": "1.0.0",
+    "name": "pwcms",
+    "version": "2.0.0",
+    "author": {
+        "name": "Brian Carter",
+        "email": "briancarter@chipsofttech.com"
+    },
+    "contributors": [
+        "Brian Carter"
+    ],
     "description": "Pond-Water CMS - A CMS and Blogging Platform",
+    "keywords": [
+        "content",
+        "management",
+        "system",
+        "blog"
+    ],
+    "homepage": "https://github.com/Pond-Water/pwCMS",
     "repository": {
         "type": "git",
-        "url": "https://github.com/pond-water/cms"
+        "url": "https://github.com/Pond-Water/pwCMS"
     },
     "dependencies": {
         "bcryptjs": "^2.1.0",
