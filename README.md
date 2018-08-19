@@ -52,3 +52,7 @@ You don't have time? You can support PwDB by sending bitcoins to this address: [
 ## License 
 
 See [License](LICENSE)
+
+## Open Source used in this product
+
+See [LICENSES](LICENSES)
