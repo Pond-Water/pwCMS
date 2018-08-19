@@ -3,8 +3,18 @@ var _ = require('lodash');
 var Q = require('q');
 var slugify = require('helpers/slugify');
 var mongo = require('mongoskin');
-var db = mongo.db(config.connectionString, { native_parser: true });
-db.bind('pages');
+
+// Mongodb:
+//var db = mongo.db(config.connectionString, { native_parser: true });
+//db.bind('pages');
+
+// pwdb way: Persistent datastore with automatic loading
+var Datastore = require('pwdb');
+var db = {};
+db.pages = new Datastore('data/pages.db');
+
+// You need to load each database (here we do it asynchronously)
+db.pages.loadDatabase();
 
 var service = {};
 
@@ -20,7 +30,9 @@ module.exports = service;
 function getAll() {
     var deferred = Q.defer();
 
-    db.pages.find().toArray(function (err, pages) {
+    //TODO: update pwDB to accept toArray
+    //db.pages.find().toArray(function (err, pages) {
+    db.pages.find({}).sort({title: 1}).exec(function (err, pages) {        
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         pages = _.sortBy(pages, function (p) { return p.title.toLowerCase(); });
@@ -48,7 +60,9 @@ function getBySlug(slug) {
 function getById(_id) {
     var deferred = Q.defer();
 
-    db.pages.findById(_id, function (err, page) {
+    //TODO: findbyid
+    //db.pages.findById(_id, function (err, page) {
+    db.pages.findOne({ _id: _id }, function (err, page) {        
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         deferred.resolve(page);

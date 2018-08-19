@@ -20,6 +20,7 @@
         "type": "git",
         "url": "https://github.com/Pond-Water/pwCMS"
     },
+    "scripts": { "start": "node server.js" },
     "dependencies": {
         "bcryptjs": "^2.1.0",
         "body-parser": "^1.13.2",

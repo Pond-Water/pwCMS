@@ -4,8 +4,18 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var Q = require('q');
 var mongo = require('mongoskin');
-var db = mongo.db(config.connectionString, { native_parser: true });
-db.bind('users');
+
+// Mongodb:
+//var db = mongo.db(config.connectionString, { native_parser: true });
+//db.bind('users');
+
+// pwdb: Persistent datastore with automatic loading
+var Datastore = require('pwdb');
+var db = {};
+db.users = new Datastore('data/users.db');
+
+// You need to load each database (here we do it asynchronously)
+db.users.loadDatabase();
 
 var service = {};
 
@@ -39,6 +49,7 @@ function authenticate(username, password) {
 function getAll() {
     var deferred = Q.defer();
 
+    //TODO: update pwDB to accept toArray
     db.users.find().toArray(function (err, users) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
@@ -56,7 +67,9 @@ function getAll() {
 function getById(_id) {
     var deferred = Q.defer();
 
-    db.users.findById(_id, function (err, user) {
+    //TODO: findbyid
+    //db.users.findById(_id, function (err, user) {
+    db.users.findOne({ _id: _id }, function (err, user) {        
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (user) {
@@ -111,7 +124,9 @@ function update(_id, userParam) {
     var deferred = Q.defer();
 
     // validation
-    db.users.findById(_id, function (err, user) {
+    //TODO: findbyid
+    //db.users.findById(_id, function (err, user) {
+    db.users.findOne({ _id: _id }, function (err, user) {         
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (user.username !== userParam.username) {
