@@ -56,3 +56,7 @@ See [License](LICENSE)
 ## Open Source used in this product
 
 See [LICENSES](LICENSES)
+
+## Special Thank You!
+MEANie - Launched this works and provided inspiration (https://github.com/cornflourblue/meanie)
+
