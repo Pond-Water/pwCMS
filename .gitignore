@@ -28,6 +28,5 @@ node_modules
 # file uploads folder
 client/blog/_content/uploads
 
-# data files
-server/data
-
+# data db
+/server/data

@@ -4,7 +4,29 @@
 
 Pond-Water CMS - A CMS & Blogging Platform
 
-For documentation and further details go to https://pond-water.com/cms
+For documentation and further details go to [coming soon] 
+
+## Install steps
+
+Make sure you have nodejs installed
+
+```
+git clone https://github.com/Pond-Water/pwCMS.git
+cd pwCMS
+cd server
+npm install
+node server.js
+```
+
+Browse to: localhost:3000/install
+        or      [ip]:3000/install
+
+Admin at: localhost:3000/admin
+
+View at: localhost:3000
+
+Enjoy!
+
 
 
 **IMPORTANT NOTE**: Please submit pull requests, bugs or feature requests. Also, please follow the <a href="#bug-reporting-guidelines">bug reporting guidelines</a> and check the <a href="https://github.com/pond-water/pwdb/wiki/Change-log" target="_blank">change log</a> before submitting an already fixed bug :)
