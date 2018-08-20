@@ -2,11 +2,6 @@
 var _ = require('lodash');
 var Q = require('q');
 var slugify = require('helpers/slugify');
-var mongo = require('mongoskin');
-
-// Mongodb:
-//var db = mongo.db(config.connectionString, { native_parser: true });
-//db.bind('posts');
 
 // pwdb way: Persistent datastore with automatic loading
 var Datastore = require('pwdb');
@@ -97,7 +92,7 @@ function update(_id, postParam) {
     var set = _.omit(postParam, '_id');
 
     db.posts.update(
-        { _id: mongo.helper.toObjectID(_id) },
+        { _id: _id },
         { $set: set },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
@@ -112,7 +107,7 @@ function _delete(_id) {
     var deferred = Q.defer();
 
     db.posts.remove(
-        { _id: mongo.helper.toObjectID(_id) },
+        { _id: _id },
         function (err) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 

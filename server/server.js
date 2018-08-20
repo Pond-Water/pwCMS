@@ -4,7 +4,6 @@ var ejs = require('ejs');
 var app = express();
 var compression = require('compression');
 var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
 var config = require('config.json');
 
@@ -22,7 +21,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
     secret: config.secret,
-    store: new MongoStore({ url: config.connectionString }),
     resave: false,
     saveUninitialized: true
 }));

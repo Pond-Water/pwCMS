@@ -1,11 +1,7 @@
 ﻿var config = require('config.json');
 var _ = require('lodash');
 var Q = require('q');
-var mongo = require('mongoskin');
 
-// Mongodb:
-//var db = mongo.db(config.connectionString, { native_parser: true });
-//db.bind('redirects');
 
 // pwdb: Persistent datastore with automatic loading
 var Datastore = require('pwdb');
@@ -111,7 +107,7 @@ function update(_id, redirectParam) {
         var set = _.omit(redirectParam, '_id');
 
         db.redirects.update(
-            { _id: mongo.helper.toObjectID(_id) },
+            { _id: _id },
             { $set: set },
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
@@ -129,7 +125,7 @@ function _delete(_id) {
     var deferred = Q.defer();
 
     db.redirects.remove(
-        { _id: mongo.helper.toObjectID(_id) },
+        { _id: _id },
         function (err) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
