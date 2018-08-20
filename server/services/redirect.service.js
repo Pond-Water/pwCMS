@@ -30,7 +30,7 @@ function getAll() {
     var deferred = Q.defer();
 
     //TODO: update pwDB to accept toArray
-    db.redirects.find().toArray(function (err, redirects) {
+    db.redirects.find({},function (err, redirects) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         deferred.resolve(redirects);
