@@ -1,9 +1,15 @@
 ﻿var config = require('config.json');
 var _ = require('lodash');
 var Q = require('q');
-var mongo = require('mongoskin');
-var db = mongo.db(config.connectionString, { native_parser: true });
-db.bind('redirects');
+
+
+// pwdb: Persistent datastore with automatic loading
+var Datastore = require('pwdb');
+var db = {};
+db.redirects = new Datastore('data/redirects.db');
+
+// You need to load each database (here we do it asynchronously)
+db.redirects.loadDatabase();
 
 var service = {};
 
@@ -19,7 +25,8 @@ module.exports = service;
 function getAll() {
     var deferred = Q.defer();
 
-    db.redirects.find().toArray(function (err, redirects) {
+    //TODO: update pwDB to accept toArray
+    db.redirects.find({},function (err, redirects) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         deferred.resolve(redirects);
@@ -31,7 +38,9 @@ function getAll() {
 function getById(_id) {
     var deferred = Q.defer();
 
-    db.redirects.findById(_id, function (err, redirect) {
+    //TODO: findbyid
+    //db.redirects.findById(_id, function (err, redirect) {
+    db.redirects.findOne({ _id: _id }, function (err, redirect) {   
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         deferred.resolve(redirect);
@@ -98,7 +107,7 @@ function update(_id, redirectParam) {
         var set = _.omit(redirectParam, '_id');
 
         db.redirects.update(
-            { _id: mongo.helper.toObjectID(_id) },
+            { _id: _id },
             { $set: set },
             function (err, doc) {
                 if (err) deferred.reject(err.name + ': ' + err.message);
@@ -116,7 +125,7 @@ function _delete(_id) {
     var deferred = Q.defer();
 
     db.redirects.remove(
-        { _id: mongo.helper.toObjectID(_id) },
+        { _id: _id },
         function (err) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 

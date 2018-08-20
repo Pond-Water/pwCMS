@@ -1,7 +1,1 @@
-{
-    "connectionString": "mongodb://localhost:27017/pwc",
-    "secret": "REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING. USED FOR ENCRYPTION!",
-    "contactEmail": "support@chipsofttech.com",
-    "googleAnalyticsAccount": "UA-124226940-1",
-    "installed": true
-}
+{"secret":"REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING. USED FOR ENCRYPTION!","contactEmail":"support@chipsofttech.com","googleAnalyticsAccount":"UA-124226940-1","installed":true}
