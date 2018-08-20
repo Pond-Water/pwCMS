@@ -2,9 +2,14 @@
 var _ = require('lodash');
 var Q = require('q');
 var slugify = require('helpers/slugify');
-var mongo = require('mongoskin');
-var db = mongo.db(config.connectionString, { native_parser: true });
-db.bind('posts');
+
+// pwdb way: Persistent datastore with automatic loading
+var Datastore = require('pwdb');
+var db = {};
+db.posts = new Datastore('data/posts.db');
+
+// You need to load each database (here we do it asynchronously)
+db.posts.loadDatabase();
 
 var service = {};
 
@@ -20,7 +25,9 @@ module.exports = service;
 function getAll() {
     var deferred = Q.defer();
 
-    db.posts.find().sort({ publishDate: -1 }).toArray(function (err, posts) {
+    //TODO: update pwDB to accept toArray
+    //db.posts.find().sort({ publishDate: -1 }).toArray(function (err, posts) {
+    db.posts.find().sort({ publishDate: -1 }).exec(function (err, posts) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         deferred.resolve(posts);
@@ -47,7 +54,9 @@ function getByUrl(year, month, day, slug) {
 function getById(_id) {
     var deferred = Q.defer();
 
-    db.posts.findById(_id, function (err, post) {
+    //TODO: pwDB review if add findById
+    //db.posts.findById(_id, function (err, post) {
+    db.posts.findOne({ _id: _id }, function (err, post) {
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         deferred.resolve(post);
@@ -83,7 +92,7 @@ function update(_id, postParam) {
     var set = _.omit(postParam, '_id');
 
     db.posts.update(
-        { _id: mongo.helper.toObjectID(_id) },
+        { _id: _id },
         { $set: set },
         function (err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
@@ -98,7 +107,7 @@ function _delete(_id) {
     var deferred = Q.defer();
 
     db.posts.remove(
-        { _id: mongo.helper.toObjectID(_id) },
+        { _id: _id },
         function (err) {
             if (err) deferred.reject(err.name + ': ' + err.message);
 
