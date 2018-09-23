@@ -30,3 +30,4 @@ client/blog/_content/uploads
 
 # data db
 /server/data
+/data
