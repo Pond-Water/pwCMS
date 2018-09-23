@@ -1,7 +1,7 @@
 ﻿var config = require('config.json');
 var _ = require('lodash');
 var Q = require('q');
-var slugify = require('helpers/slugify');
+var slugify = require('server/helpers/slugify');
 
 // pwdb way: Persistent datastore with automatic loading
 var Datastore = require('pwdb');

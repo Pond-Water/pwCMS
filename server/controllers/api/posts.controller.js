@@ -3,7 +3,7 @@ var _ = require('lodash');
 var express = require('express');
 var jwt = require('express-jwt')({ secret: config.secret });
 var router = express.Router();
-var postService = require('services/post.service');
+var postService = require('server/services/post.service');
 
 // routes
 router.get('/', getAll);
