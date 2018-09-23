@@ -2,7 +2,7 @@
 var router = express.Router();
 var config = require('config.json');
 var fs = require("fs");
-var userService = require('services/user.service');
+var userService = require('server/services/user.service');
 
 router.get('/', function (req, res) {
     if (config.installed) {

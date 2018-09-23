@@ -2,12 +2,12 @@
 var router = express.Router();
 var path = require('path');
 var multer = require('multer');
-var slugify = require('helpers/slugify');
-var fileExists = require('helpers/file-exists');
+var slugify = require('server/helpers/slugify');
+var fileExists = require('server/helpers/file-exists');
 
 router.use('/', ensureAuthenticated);
 router.post('/upload', getUpload().single('upload'), upload); // handle file upload
-router.use('/', express.static('../client/admin')); // serve admin front end files from '/admin'
+router.use('/', express.static('client/admin')); // serve admin front end files from '/admin'
 
 module.exports = router;
 
@@ -39,7 +39,7 @@ function ensureAuthenticated(req, res, next) {
 
 function getUpload() {
     // file upload config using multer
-    var uploadDir = '../client/blog/_content/uploads';
+    var uploadDir = 'client/blog/_content/uploads';
 
     var storage = multer.diskStorage({
         destination: uploadDir,

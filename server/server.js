@@ -57,7 +57,7 @@ app.use('/admin', require('./controllers/admin.controller'));
 app.use('/', require('./controllers/blog.controller'));
 
 // start server
-var port = process.env.NODE_ENV === 'production' ? 80 : 3000;
+var port = process.env.NODE_ENV === 'production' ? 8080 : 8080;
 var server = app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });

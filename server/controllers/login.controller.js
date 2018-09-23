@@ -1,6 +1,6 @@
 ﻿var express = require('express');
 var router = express.Router();
-var userService = require('services/user.service');
+var userService = require('server/services/user.service');
 
 router.get('/', function (req, res) {
     // log user out
