@@ -33,17 +33,9 @@ Enjoy!
 
 ## Support PwDB development
 
-You can support PwDB development by sending money or bitcoins!
+Time to <a href="#pull-requests">help out</a>? 
 
-Money: [![Donate to author](https://fundly.com/assets/logos/v2/fundly_logo_with_text_181_50.png)](https://fundly.com/pondwater-db)
-
-Bitcoin address: [@TODO:]
-
-No time to <a href="#pull-requests">help out</a>? 
-
-
-TODO - add install instructions
-
+You can support PwDB development by helping code, debug, ideas, or funds!
 
 
 ## Pull requests
